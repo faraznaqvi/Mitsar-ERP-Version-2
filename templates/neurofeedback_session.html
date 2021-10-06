@@ -1,0 +1,104 @@
+﻿{% extends "base_file.html" %}
+
+
+
+{% block home %}
+
+
+
+<!-- Services-->
+<section class="content-section bg-primary text-white text-center" id="services">
+    <div class="container px-4 px-lg-5">
+        <div class="content-section-heading">
+            <div>Neurofeedback Recording Time <span id="time">05:00</span> minutes!</div>
+            <input id="name" class="form-control" placeholder="File Name"/>
+           <!-- <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+        </div>
+
+        <div class="col-lg-12 col-md-12 mb-12 mb-lg-0">
+            <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
+            <h4><a type="submit" id="clickme" class="btn btn-success" href="#">Start</a></h4>
+            <!--<h4><a type="submit" id="stop" class="btn btn-danger" href="/neurofeedback">Stop</a></h4>-->
+            <h4><a type="submit" id="testing" class="btn btn-danger" href="/neurofeedback">Back</a></h4>
+
+        </div>
+           
+            <div id="video">
+                <div class="videoID">
+                    <video id="mainvideo" width="400" controls>
+                        <source src="{{url_for("static", filename="video/video.mp4") }}" type="video/mp4">
+                    </video>
+                </div>'
+            </div>
+    </div>
+    
+</section>
+
+<script>
+
+   
+    var socket = io.connect('http://127.0.0.1:5000');
+    socket.on('connect', function () {
+        socket.send('User is connected')
+    });
+
+
+    //while (true){
+    var video_status = false;
+    var i = 1;
+    socket.on('message', function (message) {
+
+        if (message % 10 == 0) {
+            //console.log(message)            
+            video_status = true
+            if (video_status == true) {
+                $("#mainvideo").trigger('play');
+            }
+        }
+
+        if (message % 10 != 0) {
+            //console.log(message)
+            video_status = false
+            if (video_status == false) {
+                $("#mainvideo").trigger('pause');
+            }
+        }
+                
+    });
+    //}
+
+    $(window).ready(function () {
+
+    
+        
+        $('#clickme').on('click', function (e) {
+            e.preventDefault() 
+            //$.getJSON('/neurofeedback_recording', { checking: "check" },
+                //function (data) {
+                    
+                //});
+            i++;
+            socket.send('User is connected')
+            return false;
+        });
+
+        $('#stop').on('click', function (e) {
+            e.preventDefault()
+            
+            video_status = false
+
+            if (video_status == false) {
+                $("#mainvideo").trigger('pause');
+                
+            }
+           
+            return false;
+        });
+
+    });
+
+
+</script>
+
+
+{% endblock %}

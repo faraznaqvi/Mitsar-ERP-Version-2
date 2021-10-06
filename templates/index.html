@@ -1,0 +1,79 @@
+{% extends "base_file.html" %}
+
+{% block home %}
+        
+      
+       
+       <!-- Services-->
+<section class="content-section bg-primary text-white text-center" id="services">
+
+    
+    <div class="container px-4 px-lg-5">
+        <div class="content-section-heading">
+            <h3 class="text-secondary mb-0"></h3>
+            <h2 class="mb-5">Press the Button to Start</h2>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="name">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Session</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="session">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Date</span>
+                </div>
+                <input type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="date">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Time in Sec</span>
+                </div>
+                <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="time">
+            </div>
+
+            <img id="image" src="https://nedncl.com/assets/images/logo.png" alt="Girl in a jacket" width="500">
+
+        </div>
+
+        <div class="row gx-4 gx-lg-5">
+
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
+                <h4><button type="submit" class="btn btn-primary" id="start" href="">Start</button></h4>
+
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
+                <h4><button type="button" class="btn btn-primary" id="left" href="">Left</button></h4>
+
+            </div>
+
+
+            <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-pencil"></i></span>
+                <h4><button type="button" class="btn btn-primary" id="right" href="">Right</button></h4>
+
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+                <span class="service-icon rounded-circle mx-auto mb-3"><i class="icon-like"></i></span>
+                <h4><button type="button" class="btn btn-primary" id="stop" href="">Stop</button></h4>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+        
+        
+  {% endblock %}      
+        
+      
