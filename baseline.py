@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import time
 from datetime import datetime
+import os 
+import random
 
 def data_acq(name, time_Duration):
     
@@ -16,7 +18,9 @@ def data_acq(name, time_Duration):
     ##name = input("Enter your name : ")
     ##time_Duration = int(input("Enter time in seconds : "))
     file_name ="./instance/" + name + ".csv"
-    #files = os.listdir('.')
+    t = "./static/images/Hands"
+    files = os.listdir(t)
+    images = random.sample(files, 40)
     
     try:
         # first resolve an EEG stream on the lab network
@@ -44,6 +48,7 @@ def data_acq(name, time_Duration):
         data = pd.DataFrame(({'Image Change Time': time_image, 'Action':action}))
         Data_df = pd.concat((time_df,sample_df,data), axis =1)
         Data_df.to_csv(file_name)
+        print(file_name)
         
         return Data_df
         

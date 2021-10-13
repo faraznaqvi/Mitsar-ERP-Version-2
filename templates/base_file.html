@@ -56,6 +56,7 @@
     // Global Variables
     let i = 1;
     var changing_images
+    var timer_control
 
     //Functions
    
@@ -67,6 +68,29 @@
     socket.on('connect', function () {
         socket.send('User is connected')
     });
+
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timer_control = setInterval(function timing() {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+                clearInterval(changing_images)
+                clearInterval(timer_control)
+                timer_control = null
+                changing_images = null
+            }
+        }, 1000);
+    }
+
 
     //function change_image() {
         
@@ -87,6 +111,9 @@
 
     $(window).ready(function () {
 
+        
+
+
         var i = 1;
 
         function change_image() {
@@ -101,7 +128,9 @@
 
         }
 
-        
+        socket.on("message", function (data) {
+            console.log(data.msg);
+        });
 
         //$("#right").on('click', function (e) {
         //    e.preventDefault();
@@ -134,10 +163,17 @@
             e.preventDefault()
 
             //sending message through socket
-            
+
+            $("#image").attr("src", "https://previews.123rf.com/images/newdesignillustrations/newdesignillustrations1902/newdesignillustrations190204361/125664398-get-ready-text-on-a-ribbon-designed-with-white-caption-and-blue-stripe-vector-banner-with-get-ready-.jpg");
+
             var temp1 = ['start',$('#name').val(), $('#session').val(), $('#date').val(),$('#time').val()]
             socket.send(temp1)
             changing_images = setInterval(change_image, 3000);
+
+            var fiveMinutes = 60*$('#time').val(),
+                display = document.querySelector('#timer');
+            startTimer(fiveMinutes, display);
+
         });
 
         //fire when stop button is triggered
@@ -146,6 +182,9 @@
             alert("stop")
             var temp1 = ['stop', $('#name').val(), $('#session').val(), $('#date').val(), $('#time').val()]
             clearInterval(changing_images);
+            clearInterval(timer_control)
+            timer_control = null
+            $('#timer').text("00:00")
             changing_images = null;
             //sending message through socket
             socket.send(temp1)

@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 from threading import Thread
 import os 
+import random
 
 
 #module loading
@@ -24,6 +25,9 @@ app.config['ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 socketio = SocketIO(app)
+
+
+
 #configuration
 
 
@@ -38,6 +42,10 @@ action_change_time_list = []
 action_changed_index = 21
 image_changed_index = 20
 df = pd.DataFrame();
+t = "./static/images/Hands"
+files = os.listdir(t)
+#images = random.sample(files, 40)
+
 
 #assigning the app name
 if __name__ == "__main__":
@@ -78,8 +86,11 @@ def handle_message(message):
 		func2()
 		action.append("start")
 		print("started")
-		func1(file_name,int(message[4])+4)
-		return '1'
+		images = random.sample(files, 40)
+		print(images)
+		#func1(file_name,int(message[4])*60)
+		socketio.emit(images)
+		return images
 		
 
 	if(message[0] == "stop"):

@@ -1,11 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\instance",
+    "\\mypython",
+    "\\static",
     "\\templates",
-    "\\templates\\static",
-    "\\templates\\static\\css"
+    "\\templates\\static"
   ],
-  "SelectedNode": "\\test_script.py",
+  "SelectedNode": "\\templates\\static\\images",
   "PreviewInSolutionExplorer": false
 }
