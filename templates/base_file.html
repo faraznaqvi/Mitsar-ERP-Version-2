@@ -111,7 +111,24 @@
 
     $(window).ready(function () {
 
-        
+        // Add event listener on keydown
+        document.addEventListener('keydown', (event) => {
+            var name = event.key;
+            var code = event.code;
+            // Alert the key name and key code on keydown
+            //alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+            if (name == "ArrowLeft") {
+                socket.send('left')
+            }
+
+            if (name == "ArrowRight") {
+                socket.send('right')
+            }
+
+            if (name == "Space") {
+                socket.send('start')
+            }
+        }, false);
 
 
         var i = 1;
@@ -183,7 +200,7 @@
             var temp1 = ['stop', $('#name').val(), $('#session').val(), $('#date').val(), $('#time').val()]
             clearInterval(changing_images);
             clearInterval(timer_control)
-            timer_control = null
+            timer_control = null 
             $('#timer').text("00:00")
             changing_images = null;
             //sending message through socket

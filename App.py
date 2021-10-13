@@ -87,9 +87,9 @@ def handle_message(message):
 		action.append("start")
 		print("started")
 		images = random.sample(files, 40)
-		print(images)
-		#func1(file_name,int(message[4])*60)
-		socketio.emit(images)
+		#print(images)
+		func1(file_name,int(message[4])*60)
+		#socketio.emit(images)
 		return images
 		
 
@@ -108,11 +108,13 @@ def handle_message(message):
 
 	if(message == "left"):
 		func2()
+		#print("left")
 		action.append("left")
 		
 	
 	if(message == "right"):
 		func2()
+		#print("right")
 		action.append("right")
 			
 
